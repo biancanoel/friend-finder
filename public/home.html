@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Friend Finder Home Page</title>
+  <!-- Latest compiled and minified CSS & JS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+  <script src="https://code.jquery.com/jquery.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+
+</head>
+<body>
+
+  <div class="container">
+    <div class="jumbotron">
+      <h1>Friend Finder</h1>
+      <h3>Find friends based on similar opinions!</h3>
+      <hr>
+      <a href="/survey"><button type="button" class="btn btn-danger btn-lg"><span class="glyphicon glyphicon-eye-open"></span> Start Survey</button></a>
+
+    </div>
+
+  </div>
+
+  <footer class="footer">
+    <div class="container">
+          <p><a href="/friends">API Friends List</a> | <a href="https://github.com/biancanoel/friend-finder" target="_blank">GitHub Repo</a></p>
+    </div>
+  </footer>
+
+  <script type="text/javascript">
+    //Created object containing all stats for new reservation to be used in adding it to server
+    $("#add-btn").on("click", function(event) {
+      event.preventDefault();
+      var newReservation = {
+        name: $("#name").val().trim(),
+        phone: $("#phonenumber").val().trim(),
+        email: $("#email").val().trim(),
+        id: $("#uniqueid").val().trim()
+      };
+  
+      //Uses object created above and sends it to be posted to server as new reservation
+      $.post("/api/new", newReservation)
+        .then(function(data) {
+          console.log(data);
+          alert("Reservation has been requested...");
+
+        });
+    });
+  </script>
+
+</body>
+</html>

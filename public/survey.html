@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+    
+</head>
+
+<body>
+    <h1>Survey</h1>
+    <form>
+        <div class="form-group">
+            <label for="name">Your Name</label>
+            <input type="text" class="form-control" id="name" placeholder="Name">
+        </div>
+
+        <div class="form-group">
+            <label for="photo">Link to Photo</label>
+            <input type="text" class="form-control" id="photo" placeholder="Link to Photo">
+        </div>
+        <hr>
+        <div class="question">
+            <h3>Question 1 </h3>
+            <h4>Your mind is always buzzing with unexplored ideas and plans.</h4>
+            <select multiple class="form-control" id="answer1">
+                <option>1</option>
+                <option>2</option>
+                <option>3</option>
+                <option>4</option>
+                <option>5</option>
+            </select>
+        </div>
+
+        <div class="question">
+            <h3>Question 2 </h3>
+            <h4>Generally speaking, you rely more on your experience than your imagination</h4>
+            <select multiple class="form-control" id="answer2">
+                <option>1</option>
+                <option>2</option>
+                <option>3</option>
+                <option>4</option>
+                <option>5</option>
+            </select>
+        </div>
+
+        <div class="question">
+            <h3>Question 3 </h3>
+            <h4>You find it easy to stay relaxed and focused even when there is some pressure.</h4>
+            <select multiple class="form-control" id="answer3">
+                <option>1</option>
+                <option>2</option>
+                <option>3</option>
+                <option>4</option>
+                <option>5</option>
+            </select>
+        </div>
+
+        <div class="question">
+            <h3>Question 4 </h3>
+            <h4>You rarely do something just out of sheer curiosity.</h4>
+            <select multiple class="form-control" id="answer4">
+                <option>1</option>
+                <option>2</option>
+                <option>3</option>
+                <option>4</option>
+                <option>5</option>
+            </select>
+        </div>
+
+        <div class="question">
+            <h3>Question 5 </h3>
+            <h4>People can rarely upset you.</h4>
+            <select multiple class="form-control" id="answer5">
+                <option>1</option>
+                <option>2</option>
+                <option>3</option>
+                <option>4</option>
+                <option>5</option>
+              </select>
+        </div>
+
+        <button type="submit" type ="button" class="btn btn-default" id="submit">Submit</button>
+    </form>
+
+    <div id="myModal" class="modal fade" role ="dialog" >
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">Meet Your New Friend! </div>
+                <div class="modal-body"> 
+                    <div class="friend-name"></div>
+                    <img class="img-responsive" src="https://www.nationalgeographic.com/content/dam/animals/pictures/mammals/d/domestic-dog/domestic-dog.adapt.590.1.jpg" alt="Image of New Friend" />
+
+                </div>
+                <div class="modal-footer">You're welcome </div>
+            </div>
+
+        </div>
+    </div>
+
+
+
+
+    <script>
+
+
+        $("#submit").on("click", function (event) {
+            event.preventDefault();
+            // var responses = [];
+
+            // responses.push(parseInt($("#answer1").val().trim()));
+            // responses.push(parseInt($("#answer2").val().trim()));
+            // responses.push(parseInt($("#answer3").val().trim()));
+            // responses.push(parseInt($("#answer4").val().trim()));
+            // responses.push(parseInt($("#answer5").val().trim()));
+            // console.log(responses);
+
+            var newFriend = {
+                name: $("#name").val().trim(),
+                photo: $("#photo").val().trim(),
+                scores: [
+                parseInt($("#answer1").val()),
+                parseInt($("#answer2").val()),
+                parseInt($("#answer3").val()),
+                parseInt($("#answer4").val()),
+                parseInt($("#answer5").val())
+                ]
+            };
+
+            $.post("/api/new", newFriend)
+                .then(function (data) {
+                    console.log(data)
+                    console.log('Your Friend profile has been added');
+
+                    $('#myModal').modal()
+                    $(".friend-name").text(`Your new friend's name is ${data.name}`);
+
+                });
+
+        });
+
+
+
+
+    </script>
+</body>
+
+</html>
