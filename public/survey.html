@@ -92,10 +92,10 @@
     <div id="myModal" class="modal fade" role ="dialog" >
         <div class="modal-dialog">
             <div class="modal-content">
-                <div class="modal-header">Meet Your New Friend! </div>
+                <div class="modal-header"> <h2>Meet Your New Friend!</h2> </div>
                 <div class="modal-body"> 
                     <div class="friend-name"></div>
-                    <img class="img-responsive" src="https://www.nationalgeographic.com/content/dam/animals/pictures/mammals/d/domestic-dog/domestic-dog.adapt.590.1.jpg" alt="Image of New Friend" />
+                    <img id ="friend-image" class="img-responsive" src="https://www.nationalgeographic.com/content/dam/animals/pictures/mammals/d/domestic-dog/domestic-dog.adapt.590.1.jpg" alt="Image of New Friend" />
 
                 </div>
                 <div class="modal-footer">You're welcome </div>
@@ -140,6 +140,7 @@
 
                     $('#myModal').modal()
                     $(".friend-name").text(`Your new friend's name is ${data.name}`);
+                    $("#friend-image").attr('src', data.photo);
 
                 });
 
