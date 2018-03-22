@@ -27,27 +27,5 @@
           <p><a href="/friends">API Friends List</a> | <a href="https://github.com/biancanoel/friend-finder" target="_blank">GitHub Repo</a></p>
     </div>
   </footer>
-
-  <script type="text/javascript">
-    //Created object containing all stats for new reservation to be used in adding it to server
-    $("#add-btn").on("click", function(event) {
-      event.preventDefault();
-      var newReservation = {
-        name: $("#name").val().trim(),
-        phone: $("#phonenumber").val().trim(),
-        email: $("#email").val().trim(),
-        id: $("#uniqueid").val().trim()
-      };
-  
-      //Uses object created above and sends it to be posted to server as new reservation
-      $.post("/api/new", newReservation)
-        .then(function(data) {
-          console.log(data);
-          alert("Reservation has been requested...");
-
-        });
-    });
-  </script>
-
 </body>
 </html>

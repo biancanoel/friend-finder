@@ -112,14 +112,6 @@
 
         $("#submit").on("click", function (event) {
             event.preventDefault();
-            // var responses = [];
-
-            // responses.push(parseInt($("#answer1").val().trim()));
-            // responses.push(parseInt($("#answer2").val().trim()));
-            // responses.push(parseInt($("#answer3").val().trim()));
-            // responses.push(parseInt($("#answer4").val().trim()));
-            // responses.push(parseInt($("#answer5").val().trim()));
-            // console.log(responses);
 
             var newFriend = {
                 name: $("#name").val().trim(),
@@ -135,13 +127,9 @@
 
             $.post("/api/new", newFriend)
                 .then(function (data) {
-                    console.log(data)
-                    console.log('Your Friend profile has been added');
-
                     $('#myModal').modal()
                     $(".friend-name").text(`Your new friend's name is ${data.name}`);
                     $("#friend-image").attr('src', data.photo);
-
                 });
 
         });
