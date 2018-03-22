@@ -15,68 +15,43 @@ var PORT = process.env.PORT || 3000;
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
-//Routes to api calls
-//GET route to display a JSON of all possible friends
-app.get("/friends", function (req, res) {
-    return res.json(friends);
-});
-//require('./routing/apiRoutes.js')(app);
 //Routes to home page and survey page
 require('./routing/htmlRoutes.js')(app);
 
+////////////////////API ROUTES 
+require('./routing/apiRoutes.js')(app);
 
-//require('./routing/apiRoutes.js')(app);
-//POST route to add a new friend 
 
-app.post("/api/new", function (req, res) {
-    var newFriend = req.body;
-    console.log(newFriend);
-   
-    //console.log(friends);
+// app.get("/friends", function (req, res) {
+//     return res.json(friends);
+// });
 
-    //FIND A FRIEND MATCH
-    //Convert new scores to integer
-    var scoresInt = [];
-    newFriend.scores.forEach(function (score) {
-        scoresInt.push(parseInt(score));
-    })
-    console.log('The new friends score are ' + scoresInt);
-    //Comvert existing friend scores to integers
-    var friendsScoresInt=[];
-    for (i=0; i<friends.length; i++) {
-        friendsScoresInt.push(friends[i].scores.map(Number));
-    }
-    console.log(friendsScoresInt);
+// app.post("/api/new", function (req, res) {
+//     var newFriend = req.body;
+  
+//     var scoresInt = [];
+//     newFriend.scores.forEach(function (score) {
+//         scoresInt.push(parseInt(score));
+//     });
 
-    var highScore = 1000;
-    var bestFriend;
+//     //Determine best friend match 
+//     var highScore = 1000;
+//     var bestFriend;
 
-    // for (i=0; i < friendsScoresInt.length; i++) {
-    //     var sum = 0;
-    //     for (j=0; j < friendsScoresInt[i].length; j++) {
-    //         sum += Math.abs(scoresInt[j] - friendsScoresInt[j])
-    //     }
-    //     if (sum<highScore) {
-    //         highScore= sum;
-    //         bestFriend = friends[i];
-    //     }
-    // }
-    for (i = 0; i < friends.length; i++) {
-        var sum = 0;
-        for (j = 0; j < friends[i].scores.length; j++) {
-            sum += Math.abs(scoresInt[j] - friends[i].scores[j]);
-        }
-        if (sum < highScore) {
-            highScore = sum;
-            bestFriend = friends[i];
-        }
+//     for (i = 0; i < friends.length; i++) {
+//         var sum = 0;
+//         for (j = 0; j < friends[i].scores.length; j++) {
+//             sum += Math.abs(scoresInt[j] - friends[i].scores[j]);
+//         }
+//         if (sum < highScore) {
+//             highScore = sum;
+//             bestFriend = friends[i];
+//         };
+//     }; 
 
-    } console.log('Your friend is...');
-    console.log(bestFriend);
-
-    friends.push(newFriend);
-    return res.json(bestFriend);
-})
+//     friends.push(newFriend);
+//     return res.json(bestFriend);
+// });
 
 
 app.listen(PORT, function () {
